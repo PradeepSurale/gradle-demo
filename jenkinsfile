@@ -1,0 +1,29 @@
+stage "preparation"
+
+node {
+   parallel (
+     phase1: { sh "echo p1; echo phase1" },
+     phase2: { sh "echo p2; echo phase2" }
+   )
+  sh "echo 42 > data"
+  stash includes: '*', name: 'binary'
+   
+}
+
+stage "do the build"
+
+parallel (
+    "stream 1": { 
+                     node { 
+                           unstash "binary"                           
+                           sh "sleep 20s" 
+                           sh "echo hstream1"
+                       } 
+                   },
+    stream2: { 
+                     node { 
+                           unstash "binary"
+                           sh "echo hello2"
+                       } 
+                   }
+)
