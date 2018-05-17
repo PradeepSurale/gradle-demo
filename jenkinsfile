@@ -21,7 +21,7 @@ parallel (
                            sh "echo hstream1"
                        } 
                    },
-    stream2: { 
+    "stream 2": { 
                      node('slave-machine') { 
 			   sh "touch nodeTwoTxt"
                            unstash "binary"
