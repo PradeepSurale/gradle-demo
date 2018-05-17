@@ -15,7 +15,7 @@ stage "do the build"
 parallel (
     "stream 1": { 
                      node { 
-			   sh touch nodeOneTxt
+			   sh "touch nodeOneTxt"
                            unstash "binary"                           
                            sh "sleep 20s" 
                            sh "echo hstream1"
@@ -23,7 +23,7 @@ parallel (
                    },
     stream2: { 
                      node { 
-			   sh touch nodeTwoTxt
+			   sh "touch nodeTwoTxt"
                            unstash "binary"
                            sh "echo hello2"
                        } 
